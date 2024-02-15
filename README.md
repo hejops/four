@@ -1,7 +1,7 @@
 # four
 
 ```sh
-~/ > ./four.py g sqt; head /tmp/sqt
+$ ./four.py g sqt; head /tmp/sqt
 ---------------------------https://boards.4chan.org/g/thread/98985047
 -------------------------------------------------------------98985047
 https://i.4cdn.org/g/1707911796612458.jpg
