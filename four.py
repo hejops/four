@@ -152,11 +152,15 @@ class Thread:  # {{{
         #     write_url_to_file(url)
 
     def get_posts(self):
-        posts = [Post(p) for p in requests.get(url=self.url, timeout=3).json()["posts"]]
+        resp = requests.get(url=self.url, timeout=3)
+        if resp.status_code == 404:
+            self.url = find_new_thread(BOARD, SUBJECT)
+            resp = requests.get(url=self.url, timeout=3)
+        posts = [Post(p) for p in resp.json()["posts"]]
         return {p.id: p for p in posts}
 
     def display(self):
-        logging.info(leftpad(url))
+        logging.info(leftpad(self.url))
 
         for post in self.posts.values():
             # ignore named users
@@ -185,7 +189,7 @@ class Thread:  # {{{
             # # only done for crosspost checking
             # thread[post.id] = post  # .body
 
-        logging.info(leftpad(url))
+        logging.info(leftpad(self.url))
 
 
 # }}}
