@@ -40,7 +40,7 @@ class Post:  # {{{
         self.author = d["name"]
 
         self.text = d.get("com")
-        self.body = self.sanitise(self.text)
+        self.body = self.sanitise()
         self.cross_ids = self.get_cross_posts()
         # print(d)
 
@@ -82,7 +82,7 @@ class Post:  # {{{
 
     def sanitise(
         self,
-        use_nitter: bool = True,
+        # use_nitter: bool = True,
     ) -> str:
         if not self.text:
             return ""
@@ -127,8 +127,8 @@ class Post:  # {{{
         ]
 
         clean_lines = "\n".join(clean_lines)
-        if use_nitter:
-            clean_lines = clean_lines.replace("twitter.com", "nitter.net")
+        # if use_nitter:
+        #     clean_lines = clean_lines.replace("twitter.com", "nitter.net")
         return clean_lines
 
 
